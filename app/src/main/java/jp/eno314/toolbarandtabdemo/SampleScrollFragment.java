@@ -11,12 +11,24 @@ import android.view.ViewGroup;
 
 public class SampleScrollFragment extends Fragment {
 
-    public static SampleScrollFragment newInstance() {
+    private static final String ARGUMENT_TAB_NAME = "ARGUMENT_TAB_NAME ";
+
+    private String mTabName = "hogehoge";
+
+    public static SampleScrollFragment newInstance(String tabName) {
         final SampleScrollFragment fragment = new SampleScrollFragment();
 
         final Bundle args = new Bundle();
+        args.putString(ARGUMENT_TAB_NAME, tabName);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mTabName = getArguments().getString(ARGUMENT_TAB_NAME);
     }
 
     @Override
@@ -26,7 +38,7 @@ public class SampleScrollFragment extends Fragment {
                 inflater.inflate(R.layout.fragment_sample_scroll, container, false);
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        recycler.setAdapter(new SampleScrollAdapter());
+        recycler.setAdapter(new SampleScrollAdapter(mTabName));
 
         return recycler;
     }

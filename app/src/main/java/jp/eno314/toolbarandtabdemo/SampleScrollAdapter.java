@@ -11,6 +11,12 @@ import android.widget.TextView;
  */
 public class SampleScrollAdapter extends RecyclerView.Adapter<SampleScrollAdapter.ViewHolder> {
 
+    private final String mTabName;
+
+    public SampleScrollAdapter(String tabName) {
+        mTabName = tabName;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -20,7 +26,7 @@ public class SampleScrollAdapter extends RecyclerView.Adapter<SampleScrollAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.textView.setText(String.valueOf(position));
+        viewHolder.textView.setText(mTabName + " - " + position);
     }
 
     @Override
